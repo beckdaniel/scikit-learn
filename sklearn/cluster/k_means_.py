@@ -430,13 +430,13 @@ def _labels_inertia_precompute_dense(X, x_squared_norms, centers,
     for center_id in range(k):
         dist = distances[center_id]
         labels[dist < mindist] = center_id
-        if constraints:
+        if constraints is not None:
             print "CONSTRAINTS!"
-            print constraints
-        #print "DISTANCE: "
-        #print dist
-        #print "LABELS: "
-        #print labels
+            print distances
+            #print constraints,
+            #print labels,
+            #print center_id
+            #print distances
         mindist = np.minimum(dist, mindist)
     inertia = mindist.sum()
     return labels, inertia
