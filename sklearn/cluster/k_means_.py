@@ -440,13 +440,18 @@ def _labels_inertia_precompute_dense(X, x_squared_norms, centers,
             for constraint in constraints:
                 if labels[constraint[0]] == labels[constraint[1]]:
                     dist = distances[labels[constraint[1]]]
-                    dist[constraint[1]] = 1000000
+                    dist[constraint[1]] = np.infty
                     sample_dist = distances[:,constraint[1]]
                     new_centroid = sample_dist.argmin()
                     mindist[constraint[1]] = sample_dist.min()
-                    labels[constraint[1]] = new_centroid
                     #print constraint
-                    #print "LABELS: ",
+                    #print "LABELS BEFORE: ",
+                    #print labels
+                    #print "NEW CENTROID: ",
+                    #print new_centroid
+                    #print distances
+                    labels[constraint[1]] = new_centroid
+                    #print "LABELS AFTER:  ",
                     #print labels
             #print old_labels
             #print labels
